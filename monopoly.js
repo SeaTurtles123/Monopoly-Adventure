@@ -367,7 +367,7 @@ function botturn () {
             console.log(botname + " payed to get out of jail.");
             botcash = botcash - 50;
             botcheckjail = 0;
-            console.log("Your turn!")
+            console.log("Your turn!");
             sleep(1000);
             playerturn();
         } else {

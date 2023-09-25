@@ -369,7 +369,6 @@ function botturn () {
             botcheckjail = 0;
             console.log("Your turn!");
             sleep(1000);
-            playerturn();
         } else {
             console.log(botname + " decided to try to roll out of jail.");
             jail1 = getRandomNumberroll();

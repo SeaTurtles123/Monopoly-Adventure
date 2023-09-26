@@ -1,3 +1,20 @@
 {
-    
+    "users":
+    {
+        "evan":{
+            "player":
+            {
+                "cash":763,
+                "properties":["New York Avenue", "Boardwalk"],
+                "currentspace":"7"
+            },
+            "bot":
+            {
+                "cash":487,
+                "properties":["Baltic Avenue", "Kentucky Avenue"],
+                "currentspace":25
+            },
+            "rent":[]
+        }
+    }
 }

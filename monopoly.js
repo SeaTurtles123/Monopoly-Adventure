@@ -1,4 +1,6 @@
 const readlineSync = require('readline-sync');
+const fs = require('fs');
+const datamono = require('./monopoly_data.json');
 function getRandomNumberroll() {
     return Math.floor(Math.random() * 6) + 1;
 }
@@ -278,17 +280,21 @@ function roll() {
 }
 function playerturn() {
     if (p1prop.length >= 5) {
-        up = ", 4. Upgrade Properties";
+        up = ", 5. Upgrade Properties";
     }
     if (p1cash < 0) {
         console.log("You ran out of money.");
         return;
     }
-    turnq = readlineSync.question("Would you like to, 1. Roll the dice, 2. View Stats, 3. View " + botname + "'s stats" + up + " (Enter Number)")
+    turnq = readlineSync.question("Would you like to, 1. Roll the dice, 2. View Stats, 3. View " + botname + "'s stats, 4. Save and exit" + up + " (Enter Number)")
     if (turnq == 1) {
         roll();
     }
-    if (turnq == 5) {
+    if (turnq == 4) {
+        saveandclose();
+        return;
+    }
+    if (turnq == 6) {
         return;
     }
     if (turnq == 2) {
@@ -317,7 +323,7 @@ function playerturn() {
         turnq = readlineSync.question('Press Y to continue ');
         playerturn();
     }
-    if (turnq == 4 && p1prop.length >= 5) {
+    if (turnq == 5 && p1prop.length >= 5) {
         upgradeprop();
     }    
     console.log(botname + "'s turn:");
@@ -428,6 +434,42 @@ function botplacestogo() {
         }
     }    
 }
+function logon () {
+    playername = readlineSync.question('Please enter your name or type nothing and press enter for a guest game.  ');
+    if (allusers.includes(playername.toLowerCase()) == true) {
+        space = datamono.users[playername].player.currentspace;
+        p1cash = datamono.users[playername].player.cash;
+        p1prop = datamono.users[playername].player.properties.slice();
+        checkjail = datamono.users[playername].player.jail;
+        botcash = datamono.users[playername].bot.cash;
+        botprop = datamono.users[playername].bot.properties.slice();
+        botspace = datamono.users[playername].bot.currentspace;
+        botcheckjail = datamono.users[playername].bot.jail;
+        console.log("Logged in as " + playername);
+    } else if (playername == "") {
+        console.log("Logged in for a guest session.");
+    } else {
+        console.log("Error finding user.  Please try again.");
+        logon();
+    }
+}
+function saveandclose () {
+    datamono.users[playername].player.currentspace = space;
+    datamono.users[playername].player.cash = p1cash;
+    datamono.users[playername].player.properties = p1prop.slice();
+    datamono.users[playername].player.jail = checkjail;
+    datamono.users[playername].bot.currentspace = botspace;
+    datamono.users[playername].bot.cash = botcash;
+    datamono.users[playername].bot.properties = botprop.slice();
+    datamono.users[playername].bot.checkjail = botcheckjail;
+    fs.writeFile("./monopoly_data.json", JSON.stringify(datamono, null, 4), err => {
+     
+        // Checking for errors
+        if (err) throw err; 
+       
+        console.log("Finished saving file.  You may now exit."); // Success
+    });
+}
 var prices = ["go", 60, "chest", 60, "income", 200, 100, "chance", 100, 120, "vistingjail", 140, 150, 140, 160, 200, 180, "chest", 180, 200, "parking", 220, "chance", 220, 240, 200, 260, 260, 150, 280, "jail", 300, 300, "chest", 320, 200, "chance", 350, "lux", 400];
 const places = ["GO", "Mediterranean Avenue", "Community Chest", "Baltic Avenue", "Income Tax", "Reading Railroad", "Oriental Avenue", "Chance", "Vermont Avenue", "Connecticut Avenue", "Jail/Just Visting", "St. Charles Place", "Electric Company", "States Avenue", "Virginia Avenue", "Pennsylvania Railroad", "St. James Place", "Community Chest", "Tennessee Avenue", "New York Avenue", "Free Parking", "Kentucky Avenue", "Chance", "Indiana Avenue", "Illinois Avenue", "B. & O. Railroad", "Atlantic Avenue", "Ventnor Avenue", "Water Works", "Marvin Gardens", "Go to Jail", "Pacific Avenue", "North Carolina Avenue", "Community Chest", "Pennsylvania Avenue", "Short Line", "Chance", "Park Place", "Luxury Tax", "Boardwalk"];
 var p1_roll = 0;
@@ -460,12 +502,15 @@ var uppropi1 = 0;
 var botup1 = 0;
 var botup2 = 0;
 var upqy = "";
+var allusers = Object.keys(datamono.users);
 var up = "";
 var uppropi2 = 0;
+var playername = "";
 var chancespace = "";
 var botdec = 0;
 console.log("Welcome to Monopoly Adventure!");
 sleep(2000);
+logon();
 var botname = readlineSync.question('Please enter the name for your opponent: ');
 playerturn();
 console.log("Thanks for Playing!");

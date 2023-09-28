@@ -1,20 +1,70 @@
 {
-    "users":
-    {
-        "evan":{
-            "player":
-            {
-                "cash":763,
-                "properties":["New York Avenue", "Boardwalk"],
-                "currentspace":"7"
+    "users": {
+        "evan": {
+            "player": {
+                "cash": 363,
+                "properties": [
+                    "New York Avenue",
+                    "Boardwalk",
+                    "St. James Place",
+                    "Indiana Avenue"
+                ],
+                "currentspace": 23,
+                "jail": 0
             },
-            "bot":
-            {
-                "cash":487,
-                "properties":["Baltic Avenue", "Kentucky Avenue"],
-                "currentspace":25
+            "bot": {
+                "cash": 187,
+                "properties": [
+                    "Baltic Avenue",
+                    "Kentucky Avenue",
+                    "North Carolina Avenue"
+                ],
+                "currentspace": 4,
+                "jail": 0,
+                "checkjail": 0
             },
-            "rent":[]
+            "rent": [
+                "",
+                2,
+                "",
+                4,
+                "",
+                25,
+                6,
+                "",
+                6,
+                8,
+                "",
+                10,
+                5,
+                10,
+                12,
+                25,
+                14,
+                "",
+                14,
+                16,
+                "",
+                18,
+                "",
+                18,
+                20,
+                25,
+                22,
+                22,
+                10,
+                24,
+                "",
+                26,
+                26,
+                "",
+                28,
+                25,
+                "",
+                35,
+                "",
+                50
+            ]
         }
     }
 }

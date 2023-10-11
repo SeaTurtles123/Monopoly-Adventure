@@ -508,10 +508,9 @@ var uppropi2 = 0;
 var playername = "";
 var chancespace = "";
 var botdec = 0;
-console.log("Welcome to Monopoly Adventure!");
+document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";
 sleep(2000);
-document.body.innerHTML = "<h1>Hello!</h1>"
-logon();
+//logon();
 var botname = readlineSync.question('Please enter the name for your opponent: ');
 playerturn();
 console.log("Thanks for Playing!");

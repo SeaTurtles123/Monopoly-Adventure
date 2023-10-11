@@ -1,6 +1,6 @@
-const readlineSync = require('readline-sync');
-const fs = require('fs');
-const datamono = require('./monopoly_data.json');
+//const readlineSync = require('readline-sync');
+//const fs = require('fs');
+//const datamono = require('./monopoly_data.json');
 function getRandomNumberroll() {
     return Math.floor(Math.random() * 6) + 1;
 }
@@ -502,7 +502,7 @@ var uppropi1 = 0;
 var botup1 = 0;
 var botup2 = 0;
 var upqy = "";
-var allusers = Object.keys(datamono.users);
+//var allusers = Object.keys(datamono.users);
 var up = "";
 var uppropi2 = 0;
 var playername = "";
@@ -510,6 +510,7 @@ var chancespace = "";
 var botdec = 0;
 console.log("Welcome to Monopoly Adventure!");
 sleep(2000);
+document.body.innerHTML = "<h1>Hello!</h1>"
 logon();
 var botname = readlineSync.question('Please enter the name for your opponent: ');
 playerturn();

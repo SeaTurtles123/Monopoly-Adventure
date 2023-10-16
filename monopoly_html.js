@@ -486,6 +486,7 @@ var getprop = "";
 var turnq = "";
 var turn = "";
 var upq = "";
+const textInput = document.getElementById("inq");
 var chestnum = "";
 var botroll = 0;
 var botcheckjail = 0;
@@ -511,6 +512,8 @@ var botdec = 0;
 document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";
 sleep(2000);
 //logon();
-var botname = readlineSync.question('Please enter the name for your opponent: ');
+//var botname = readlineSync.question('Please enter the name for your opponent: ');
+document.getElementById("output").innerHTML += "Please enter the name of you opponent."
+
 playerturn();
 console.log("Thanks for Playing!");

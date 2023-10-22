@@ -470,6 +470,12 @@ function saveandclose () {
         console.log("Finished saving file.  You may now exit."); // Success
     });
 }
+function checkforenter () {
+    old_enter = entercount;
+    if (old_enter == entercount) {
+        checkforenter();
+    }
+}
 var prices = ["go", 60, "chest", 60, "income", 200, 100, "chance", 100, 120, "vistingjail", 140, 150, 140, 160, 200, 180, "chest", 180, 200, "parking", 220, "chance", 220, 240, 200, 260, 260, 150, 280, "jail", 300, 300, "chest", 320, 200, "chance", 350, "lux", 400];
 const places = ["GO", "Mediterranean Avenue", "Community Chest", "Baltic Avenue", "Income Tax", "Reading Railroad", "Oriental Avenue", "Chance", "Vermont Avenue", "Connecticut Avenue", "Jail/Just Visting", "St. Charles Place", "Electric Company", "States Avenue", "Virginia Avenue", "Pennsylvania Railroad", "St. James Place", "Community Chest", "Tennessee Avenue", "New York Avenue", "Free Parking", "Kentucky Avenue", "Chance", "Indiana Avenue", "Illinois Avenue", "B. & O. Railroad", "Atlantic Avenue", "Ventnor Avenue", "Water Works", "Marvin Gardens", "Go to Jail", "Pacific Avenue", "North Carolina Avenue", "Community Chest", "Pennsylvania Avenue", "Short Line", "Chance", "Park Place", "Luxury Tax", "Boardwalk"];
 var p1_roll = 0;
@@ -484,6 +490,7 @@ var botprop = [];
 var botspace = 0;
 var getprop = "";
 var turnq = "";
+var zero = 0;
 var turn = "";
 var upq = "";
 const textInput = document.getElementById("inq");
@@ -508,12 +515,49 @@ var up = "";
 var uppropi2 = 0;
 var playername = "";
 var chancespace = "";
+var entercount = 0;
+var old_enter = 0;
 var botdec = 0;
+document.addEventListener("keyup", function(event) {
+    if (event.code === 'Enter') {
+        entercount++;
+    }
+});
 document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";
 sleep(2000);
 //logon();
 //var botname = readlineSync.question('Please enter the name for your opponent: ');
-document.getElementById("output").innerHTML += "Please enter the name of you opponent."
-
+var input = document.getElementById("inq");
+var ret = "";
+input.addEventListener("keyup", function(event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.code === 'Enter') {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Get the input value
+      var inputValue = this.value;
+      // Call a function you want to execute when the "Enter" key is pressed
+      yourFunction(inputValue);
+    }
+  });
+  
+  // Define your function that will run when "Enter" is pressed
+  function yourFunction(inputValue) {
+    alert('You entered: ' + inputValue);
+    ret = inputValue;
+  }
+document.getElementById("output").innerHTML += "Please enter the name of your opponent.";
+//checkforenter();
+async function checkInput() {
+    while (true) {
+      if (ret !== "") {
+        alert('You entered for me: ' + input.value);
+        break;
+      }
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Sleep for 1 second
+    }
+}
+checkInput();
+document.getElementById("output").innerHTML += "Sup";
 playerturn();
 console.log("Thanks for Playing!");

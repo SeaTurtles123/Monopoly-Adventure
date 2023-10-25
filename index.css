@@ -9,13 +9,24 @@ body {
     background-color: antiquewhite;
 }
 #output {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    line-height: 0.5cm;
+}
+#container {
+    height: 550px;
     overflow: auto;
-    height: 500px;
-    width: 550px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+.input-container {
+    display: flex;
+    padding: 10px;
 }
-label {
-    text-align: center;
+.input-container input {
+    flex: 1;
+    padding: 5px;
 }
-#inq {
-    text-align: center;
+.input-container button {
+    padding: 5px 10px;
+    margin-left: 10px;
 }

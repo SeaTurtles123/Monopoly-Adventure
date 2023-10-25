@@ -5,10 +5,15 @@
     </head>
     <body>
         <h1 id="title"></h1>
-        <div id="output">
+        <div id = container>
+            <div id="output">
+                <!-- Output goes here -->
+            </div>
         </div>
-        <label for="inq">Choice:</label>
-        <input type="text" id="inq" name="inq">
+        <form onsubmit="executeCommand(); return false;" class="input-container">
+            <input type="text" id="commandInput" placeholder="Enter a choice">
+            <button type="submit">Submit</button>
+        </form>
         <script src="monopoly_html.js"></script>
        
     </body>

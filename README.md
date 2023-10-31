@@ -13,3 +13,10 @@ Steps (Using Web-based app):
 4. Lastly type <code>node index.js</code> into the terminal and you should be all set
 
 Or you can just go to https://stackblitz.com/edit/stackblitz-starters-qm6oq6?file=monopoly.js and type <code>node monopoly.js</code>
+
+<br>
+<strong>The Website beta version is now avalible!</strong>
+
+To find it, go to https://monopoly-adventure.000webhostapp.com
+
+Thank you 000WebHost!

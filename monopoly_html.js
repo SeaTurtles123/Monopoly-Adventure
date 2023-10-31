@@ -457,6 +457,14 @@ var botdec = 0;
 var inputvalue = "";
 var botname = "";
 var upques = 0;
+function clearimages () {
+    document.getElementById("images").innerHTML = "";
+}
+function cashimage () {
+    document.getElementById("images").innerHTML = '<img src="money.png" alt="money">';
+    document.getElementById("images").innerHTML += '<embed src="soundeffect.mp3" loop="false" autostart="true" width="2" height="0">';
+    setTimeout(clearimages, 2500);
+}
 //Executing a Command
 function executeCommand () {
     inputvalue = document.getElementById("commandInput").value;
@@ -464,8 +472,10 @@ function executeCommand () {
     if (botname == "") {
         botname = inputvalue;
         document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
+        document.getElementById("output").innerHTML += "<br>You start with $1500."
         document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
         sleep(500);
+        cashimage();
         playerturn();
     } else if (turnq == 0) {
         playerturn2 ();

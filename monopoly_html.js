@@ -530,7 +530,6 @@ function executeCommand () {
         playerturn();
     }      
 }
-//Music
 function getpropmusic () {
     document.getElementById("images").innerHTML = '<img src="buyproppic.jpg" alt="pic-of-house">';
     document.getElementById("images").innerHTML += '<embed src="getstuff.mp3" loop="false" autostart="true" width="2" height="0">';

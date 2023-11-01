@@ -9,6 +9,7 @@ function botnum(min, max) {
 }
 function buyprop () {
     p1prop.push(places[space]);
+    getpropmusic();
     p1cash = p1cash - prices[space];
     document.getElementById("output").innerHTML += "<br>You now have $" + p1cash;
     prices[space] = "bought";
@@ -524,9 +525,16 @@ function executeCommand () {
         p1cash = p1cash - 150;
         document.getElementById("output").innerHTML += "<br>You curretnly have $" + p1cash + ".";
         document.getElementById("output").innerHTML += "<br>Current rent of " + places[uppropi2] + " is now $" + rent[uppropi2] + ".";
+        getpropmusic();
         upques = 0;
         playerturn();
     }      
+}
+//Music
+function getpropmusic () {
+    document.getElementById("images").innerHTML = '<img src="buyproppic.jpg" alt="pic-of-house">';
+    document.getElementById("images").innerHTML += '<embed src="getstuff.mp3" loop="false" autostart="true" width="2" height="0">';
+    setTimeout(clearimages, 2500);
 }
 //Start of Program
 document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";

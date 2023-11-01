@@ -31,6 +31,7 @@ function placestogo() {
         }
         if (prices[space] == "parking") {
             p1cash = p1cash + 500;
+            cashimage();
             document.getElementById("output").innerHTML += "<br>You landed on Free Parking and earned $500!";
         }
         if (prices[space] == "jail") {
@@ -101,6 +102,7 @@ function getchestcard() {
         p1cash = p1cash + chestspace;
         if (chestspace > 0) {
             document.getElementById("output").innerHTML += "<br>You earned $" + chestspace + "!";
+            cashimage();
         }
         if (chestspace < 0) {
             document.getElementById("output").innerHTML += "<br>You lost $" + (chestspace * -1);
@@ -151,6 +153,7 @@ function getchancecard() {
             }
             if (space > chancei) {
                 p1cash = p1cash + 200;
+                cashimage();
                 document.getElementById("output").innerHTML += "<br>You passed Go and Collected $200!";
             }
             space = chancei;
@@ -166,6 +169,7 @@ function getchancecard() {
         p1cash = p1cash + chancespace;
         if (chancespace > 0) {
             document.getElementById("output").innerHTML += "<br>You earned $" + chancespace + "!";
+            cashimage();
         }
         if (chancespace < 0) {
             document.getElementById("output").innerHTML += "<br>You lost $" + (chancespace * -1);
@@ -229,6 +233,7 @@ function roll() {
         p1_roll =  getRandomNumberroll() + getRandomNumberroll();
         if (p1_roll == 2) {
             p1cash = p1cash + 686;
+            cashimage();
             document.getElementById("output").innerHTML += "<br>You rolled Snake Eyes and got $686!";
         }
         space = space + p1_roll;
@@ -236,10 +241,10 @@ function roll() {
             space = space - 40;
             document.getElementById("output").innerHTML += "<br>You passed GO and colleted $200!";
             p1cash = p1cash + 200;
+            cashimage();
         }
         document.getElementById("output").innerHTML += "<br>You rolled a " + p1_roll + " and landed on " + places[space];
-        //sleep(1000);
-        setTimeout(placestogo, 1000);
+        placestogo();
     } else {
         document.getElementById("output").innerHTML += "<br>You have $" + p1cash;
         jailq = "";
@@ -408,6 +413,7 @@ function botplacestogo() {
                 botcash = botcash - rent[botspace];
                 p1cash = p1cash + rent[botspace];
                 document.getElementById("output").innerHTML += "<br>" + botname + " payed you a rent of $" + rent[botspace];
+                cashimage();
                 document.getElementById("output").innerHTML += "<br>You now have $" + p1cash;
             }
         }
@@ -478,7 +484,6 @@ function executeCommand () {
         document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
         document.getElementById("output").innerHTML += "<br>You start with $1500."
         document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
-        //sleep(500);
         cashimage();
         playerturn();
     } else if (turnq == 0) {
@@ -505,7 +510,6 @@ function executeCommand () {
         }
         botturn();
     } else if (upq != "" && upques == 1) {
-        //sleep(500);
         document.getElementById("output").innerHTML += "<br>You selected " + p1prop[upq] + ".";
         for (var i = 0; i < places.length; i++) {
             if (p1prop[upq] == places[i]) {
@@ -522,5 +526,4 @@ function executeCommand () {
 }
 //Start of Program
 document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";
-//sleep(2000);
 document.getElementById("output").innerHTML += "Please enter the name of your opponent.";

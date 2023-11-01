@@ -275,6 +275,7 @@ function playerturn2 () {
             document.getElementById("output").innerHTML += "<br>" + i + ":" + p1prop[i];
         }
         playerturn();
+        return;
     }
     if (turnq == 3) {
         document.getElementById("output").innerHTML += "<br>" + botname + " has $" + botcash;
@@ -287,6 +288,7 @@ function playerturn2 () {
             document.getElementById("output").innerHTML += "<br>" + i + ": " + botprop[i];
         }
         playerturn();
+        return;
     }
     if (turnq == 5 && p1prop.length >= 5) {
         upgradeprop();
@@ -508,8 +510,10 @@ function executeCommand () {
                 document.getElementById("output").innerHTML += "<br>Better luck next time!";
             }
         }
+        document.getElementById("output").innerHTML += "<br>_______________________";
         botturn();
-    } else if (upq != "" && upques == 1) {
+    } else if (upq == "" && upques == 1) {
+        upq = inputvalue;
         document.getElementById("output").innerHTML += "<br>You selected " + p1prop[upq] + ".";
         for (var i = 0; i < places.length; i++) {
             if (p1prop[upq] == places[i]) {

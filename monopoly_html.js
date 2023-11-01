@@ -14,7 +14,7 @@ function buyprop () {
     prices[space] = "bought";
     document.getElementById("output").innerHTML += "<br>________________________________";
     document.getElementById("output").innerHTML += "<br>" + botname + "'s turn:";
-    sleep(500);
+    //sleep(500);
     botturn();
 }
 function placestogo() {
@@ -73,13 +73,13 @@ function checkowner (prop) {
         }
     }
 }
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
+//function sleep(milliseconds) {
+   // const date = Date.now();
+   // let currentDate = null;
+   // do {
+   //   currentDate = Date.now();
+   // } while (currentDate - date < milliseconds);
+//}
 function getchestcard() {
     chestnum = getRandomNumbercard();
     chestspace = cchest[chestnum];
@@ -238,7 +238,7 @@ function roll() {
             p1cash = p1cash + 200;
         }
         document.getElementById("output").innerHTML += "<br>You rolled a " + p1_roll + " and landed on " + places[space];
-        sleep(1000);
+        //sleep(1000);
         placestogo();
     } else {
         document.getElementById("output").innerHTML += "<br>You have $" + p1cash;
@@ -262,7 +262,7 @@ function playerturn2 () {
         return;
     }
     if (turnq == 2) {
-        sleep(1500);
+        //sleep(1500);
         document.getElementById("output").innerHTML += "<br>You have $" + p1cash;
         document.getElementById("output").innerHTML += "<br>Your current space is " + places[space];
         document.getElementById("output").innerHTML += "<br>Your properties are: ";
@@ -273,12 +273,12 @@ function playerturn2 () {
     }
     if (turnq == 3) {
         document.getElementById("output").innerHTML += "<br>" + botname + " has $" + botcash;
-        sleep(300);
+        //sleep(300);
         document.getElementById("output").innerHTML += "<br>" + botname + " is currently on " + places[botspace];
-        sleep(300);
+        //sleep(300);
         document.getElementById("output").innerHTML += "<br>" + botname + "'s properties are:";
         for (var i = 0; i < botprop.length; i++) {
-            sleep(100);
+            //sleep(100);
             document.getElementById("output").innerHTML += "<br>" + i + ": " + botprop[i];
         }
         playerturn();
@@ -288,7 +288,7 @@ function playerturn2 () {
     }
     document.getElementById("output").innerHTML += "<br>________________________________";
     document.getElementById("output").innerHTML += "<br>" + botname + "'s turn:";
-    sleep(500);
+    //sleep(500);
     botturn();
 }
 function playerturn () {
@@ -309,7 +309,7 @@ function botturn () {
         return;
     }
     document.getElementById("output").innerHTML += "<br>" + botname + " is deciding.";
-    sleep(1500);
+    //sleep(1500);
     if (botnum(1, 3) == 1 && botprop.length >= 5) {
         if (botcash >= 250) {
             document.getElementById("output").innerHTML += "<br>" + botname + " is deciding which proerty to upgrade.";
@@ -319,7 +319,7 @@ function botturn () {
                     botup2 = i;
                 }
             }
-            sleep(1000);
+            //sleep(1000);
             document.getElementById("output").innerHTML += "<br>" + botname + " choose " + places[botup2] + " to upgrade.";
             rent[botup2] = rent[botup2] * 3;
             document.getElementById("output").innerHTML += "<br>" + places[botup2] + "'s rent is now $" + rent[botup2];
@@ -328,7 +328,7 @@ function botturn () {
     } 
     if (botcheckjail == 0) {
         document.getElementById("output").innerHTML += "<br>" + botname + " is rolling.";
-        sleep(1000);
+        //sleep(1000);
         botroll = getRandomNumberroll() + getRandomNumberroll();
         botspace = botspace + botroll;
         if (botspace >= 40) {
@@ -347,7 +347,7 @@ function botturn () {
             botcash = botcash - 50;
             botcheckjail = 0;
             document.getElementById("output").innerHTML += "<br>Your turn!";
-            sleep(1000);
+            //sleep(1000);
         } else {
             document.getElementById("output").innerHTML += "<br>" + botname + " decided to try to roll out of jail.";
             jail1 = getRandomNumberroll();
@@ -360,7 +360,7 @@ function botturn () {
             }
         }
     }
-    sleep(1500);
+    //sleep(1500);
     turncount++;
     document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
     document.getElementById("output").innerHTML += "<br>Your turn!";
@@ -474,7 +474,7 @@ function executeCommand () {
         document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
         document.getElementById("output").innerHTML += "<br>You start with $1500."
         document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
-        sleep(500);
+        //sleep(500);
         cashimage();
         playerturn();
     } else if (turnq == 0) {
@@ -501,7 +501,7 @@ function executeCommand () {
         }
         botturn();
     } else if (upq != "" && upques == 1) {
-        sleep(500);
+        //sleep(500);
         document.getElementById("output").innerHTML += "<br>You selected " + p1prop[upq] + ".";
         for (var i = 0; i < places.length; i++) {
             if (p1prop[upq] == places[i]) {
@@ -518,5 +518,5 @@ function executeCommand () {
 }
 //Start of Program
 document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";
-sleep(2000);
+//sleep(2000);
 document.getElementById("output").innerHTML += "Please enter the name of your opponent.";

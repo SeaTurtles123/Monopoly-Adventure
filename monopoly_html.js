@@ -239,7 +239,7 @@ function roll() {
         }
         document.getElementById("output").innerHTML += "<br>You rolled a " + p1_roll + " and landed on " + places[space];
         //sleep(1000);
-        placestogo();
+        setTimeout(placestogo, 1000);
     } else {
         document.getElementById("output").innerHTML += "<br>You have $" + p1cash;
         jailq = "";
@@ -309,7 +309,9 @@ function botturn () {
         return;
     }
     document.getElementById("output").innerHTML += "<br>" + botname + " is deciding.";
-    //sleep(1500);
+    setTimeout(botturn2, 1000);
+}
+function botturn2 () {
     if (botnum(1, 3) == 1 && botprop.length >= 5) {
         if (botcash >= 250) {
             document.getElementById("output").innerHTML += "<br>" + botname + " is deciding which proerty to upgrade.";
@@ -340,7 +342,7 @@ function botturn () {
             botcash = botcash + 686;
         }
         document.getElementById("output").innerHTML += "<br>" + botname + " rolled a " + botroll + " and landed on " + places[botspace];
-        botplacestogo();
+        setTimeout(botplacestogo, 1000);
     } else {
         if (botcash > 200) {
             document.getElementById("output").innerHTML += "<br>" + botname + " payed to get out of jail.";
@@ -360,7 +362,9 @@ function botturn () {
             }
         }
     }
-    //sleep(1500);
+    setTimeout(startplayerturn, 1500);
+}
+function startplayerturn() {
     turncount++;
     document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
     document.getElementById("output").innerHTML += "<br>Your turn!";

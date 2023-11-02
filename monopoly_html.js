@@ -26,29 +26,23 @@ function placestogo() {
     } else {
         if (prices[space] == "chance") {
             getchancecard();
-        }
-        if (prices[space] == "chest") {
+        } else if (prices[space] == "chest") {
             getchestcard();
-        }
-        if (prices[space] == "parking") {
+        } else if (prices[space] == "parking") {
             p1cash = p1cash + 500;
             cashimage();
             document.getElementById("output").innerHTML += "<br>You landed on Free Parking and earned $500!";
-        }
-        if (prices[space] == "jail") {
+        } else if (prices[space] == "jail") {
             document.getElementById("output").innerHTML += "<br>You got sent to jail.";
             space = 10;
             checkjail = 1;
-        }
-        if (prices[space] == "income") {
+        } else if (prices[space] == "income") {
             document.getElementById("output").innerHTML += "<br>You payed $200 for income tax.";
             p1cash = p1cash - 200;
-        }
-        if (prices[space] == "lux") {
+        } else if (prices[space] == "lux") {
             p1cash = p1cash - 75;
             document.getElementById("output").innerHTML += "<br>You payed $75 for Luxury Tax and have $" + p1cash + " left.";
-        }
-        if (prices[space] == "bought") {
+        } else if (prices[space] == "bought") {
             document.getElementById("output").innerHTML += "<br>" + places[space] + " is already bought.";
             owner = checkowner(space);
             if (owner == "p1") {
@@ -376,6 +370,7 @@ function startplayerturn() {
     turncount++;
     document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
     document.getElementById("output").innerHTML += "<br>Your turn!";
+    //updatestats();
     playerturn();
 }
 function botplacestogo() {
@@ -389,28 +384,22 @@ function botplacestogo() {
     } else {
         if (prices[botspace] == "chance") {
             botgetchancecard();
-        }
-        if (prices[botspace] == "chest") {
+        } else if (prices[botspace] == "chest") {
             botgetchestcard();
-        }
-        if (prices[botspace] == "parking") {
+        } else if (prices[botspace] == "parking") {
             botcash = botcash + 500;
             document.getElementById("output").innerHTML += "<br>" + botname + " landed on Free Parking and earned $500.";
-        }
-        if (prices[botspace] == "jail") {
+        } else if (prices[botspace] == "jail") {
             document.getElementById("output").innerHTML += "<br>" + botname + " got sent to jail.";
             botspace = 10;
             botcheckjail = 1;
-        }
-        if (prices[botspace] == "income") {
+        } else if (prices[botspace] == "income") {
             document.getElementById("output").innerHTML += "<br>" + botname + " payed $200 for income tax.";
             botcash = botcash - 200;
-        }
-        if (prices[botspace] == "lux") {
+        } else if (prices[botspace] == "lux") {
             botcash = botcash - 75;
             document.getElementById("output").innerHTML += "<br>" + botname + " payed $75 for Luxury Tax.";
-        }
-        if (prices[botspace] == "bought") {
+        } else if (prices[botspace] == "bought") {
             owner = checkowner(botspace);
             if (owner == "p1") {
                 botcash = botcash - rent[botspace];
@@ -481,6 +470,9 @@ function cashimage () {
 //Executing a Command
 function executeCommand () {
     inputvalue = document.getElementById("commandInput").value;
+    if (inputvalue == "") {
+        return;
+    }
     document.getElementById("commandInput").value = "";
     if (botname == "") {
         botname = inputvalue;
@@ -535,6 +527,15 @@ function getpropmusic () {
     document.getElementById("images").innerHTML += '<embed src="getstuff.mp3" loop="false" autostart="true" width="2" height="0">';
     setTimeout(clearimages, 2500);
 }
+function updatestats () {
+    document.getElementById("stats").innerHTML = "Your stats:<br>Current cash: " + p1cash + "<br>Current Location: " + places[space];
+    document.getElementById("stats").innerHTML += "<br>Your properties are: "
+    for (var i = 0; i < p1prop.length; i++) {
+        document.getElementById("stats").innerHTML += "<br>" + i + ":" + p1prop[i];
+    }
+}
 //Start of Program
-document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure!";
+document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure V2.1!";
 document.getElementById("output").innerHTML += "Please enter the name of your opponent.";
+setInterval(updatestats, 5000);
+//updatestats();

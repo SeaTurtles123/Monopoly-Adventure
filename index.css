@@ -11,6 +11,8 @@ body {
 #output {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     line-height: 0.5cm;
+    flex: 1;
+    padding: 5px;
 }
 #container {
     height: 550px;
@@ -33,4 +35,11 @@ body {
 #images {
     float: right;
     margin-left: 20px;
+}
+#stats {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 5px;
+    font-size: 25px;
+    overflow: auto;
+    height: 200px;
 }

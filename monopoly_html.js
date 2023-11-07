@@ -208,7 +208,7 @@ function botgetchancecard() {
     }
 }
 function upgradeprop() {
-    document.getElementById("output").innerHTML += "<br>Please select from your list of properties.  Upgradeing a property costs $150.  Enter number below.";
+    document.getElementById("output").innerHTML += "<br>Please select from your list of properties.  Upgradeing a property costs $" + upgradepropcost + ".  Enter number below.";
     document.getElementById("output").innerHTML += "<br>You currently have $" + p1cash + ".";
     for (var i = 0; i < p1prop.length; i++) {
         uppropi1 = i;
@@ -456,6 +456,7 @@ var chancespace = "";
 var entercount = 0;
 var old_enter = 0;
 var botdec = 0;
+var upgradepropcost = 150;
 var inputvalue = "";
 var botname = "";
 var upques = 0;
@@ -483,9 +484,14 @@ function executeCommand () {
         playerturn();
     } else if (turnq == 0) {
         playerturn2 ();
-    } else if (getprop == "" && inputvalue == "y") {
+    } else if (getprop == "" && inputvalue == "y" || inputvalue == "n") {
         getprop = inputvalue;
-        buyprop();
+        if (inputvalue == "y") {
+            buyprop();
+        } else {
+            document.getElementById("output").innerHTML += "<br>___________________"
+            botturn();
+        }
     } else if (jailq == "") {
         jailq = inputvalue;
         if (jailq == "y") {
@@ -518,6 +524,7 @@ function executeCommand () {
         document.getElementById("output").innerHTML += "<br>You curretnly have $" + p1cash + ".";
         document.getElementById("output").innerHTML += "<br>Current rent of " + places[uppropi2] + " is now $" + rent[uppropi2] + ".";
         getpropmusic();
+        upgradepropcost += 10;
         upques = 0;
         playerturn();
     }      

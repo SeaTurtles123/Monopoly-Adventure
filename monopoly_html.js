@@ -267,7 +267,13 @@ function playerturn2 () {
         document.getElementById("output").innerHTML += "<br>Your current space is " + places[space];
         document.getElementById("output").innerHTML += "<br>Your properties are: ";
         for (var i = 0; i < p1prop.length; i++) {
-            document.getElementById("output").innerHTML += "<br>" + i + ":" + p1prop[i];
+            uppropi1 = i;
+            for (var a = 0; a < places.length; a++) {
+                if (places[a] == p1prop[uppropi1]) {
+                    uppropi2 = a;
+                }
+            }
+            document.getElementById("output").innerHTML += "<br>" + i + ": " + p1prop[i] + " (Current Rent: $" + rent[uppropi2] + ")";
         }
         playerturn();
         return;

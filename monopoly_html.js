@@ -492,7 +492,7 @@ function executeCommand () {
                 cashimage();
                 playerturn();
             } else {
-                botname = inputvalue;
+                botname = "Cheaters Rival";
                 document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
                 document.getElementById("output").innerHTML += "<br>You start with $" + p1cash + ".";
                 document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
@@ -546,7 +546,7 @@ function executeCommand () {
         }
         rent[uppropi2] = rent[uppropi2] * 3;
         p1cash = p1cash - upgradepropcost;
-        document.getElementById("output").innerHTML += "<br>You curretnly have $" + p1cash + ".";
+        document.getElementById("output").innerHTML += "<br>You currently have $" + p1cash + ".";
         document.getElementById("output").innerHTML += "<br>Current rent of " + places[uppropi2] + " is now $" + rent[uppropi2] + ".";
         getpropmusic();
         upgradepropcost += 5;

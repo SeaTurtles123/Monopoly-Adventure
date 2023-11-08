@@ -254,7 +254,7 @@ function playerturn2 () {
             return;
         }
     }
-    if (turnq == 4) {
+    if (turnq == 4 && p1prop.length >= 5) {
         upgradeprop();
         return;
     }
@@ -284,9 +284,6 @@ function playerturn2 () {
         }
         playerturn();
         return;
-    }
-    if (turnq == 5 && p1prop.length >= 5) {
-        upgradeprop();
     }
     document.getElementById("output").innerHTML += "<br>________________________________";
     document.getElementById("output").innerHTML += "<br>" + botname + "'s turn:";
@@ -327,7 +324,8 @@ function botturn2 () {
             document.getElementById("output").innerHTML += "<br>" + botname + " choose " + places[botup2] + " to upgrade.";
             rent[botup2] = rent[botup2] * 3;
             document.getElementById("output").innerHTML += "<br>" + places[botup2] + "'s rent is now $" + rent[botup2];
-            botcash = botcash - 150;
+            botcash = botcash - botupgradecost;
+            botupgradecost += 5;
         } 
     } 
     if (botcheckjail == 0) {
@@ -457,6 +455,7 @@ var entercount = 0;
 var old_enter = 0;
 var botdec = 0;
 var upgradepropcost = 150;
+var botupgradecost = 150;
 var inputvalue = "";
 var botname = "";
 var upques = 0;
@@ -476,12 +475,32 @@ function executeCommand () {
     }
     document.getElementById("commandInput").value = "";
     if (botname == "") {
-        botname = inputvalue;
-        document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
-        document.getElementById("output").innerHTML += "<br>You start with $1500."
-        document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
-        cashimage();
-        playerturn();
+        if (inputvalue == "cheater") {
+            p1cash = prompt("You cheater!  \nEnter the amount of cash you want you cheater.");
+            if (isNaN(p1cash)) {
+                document.getElementById("output").innerHTML += "<br>You didn't enter a number!  Now you get $1000.  Good Luck!";
+                p1cash = 1000;
+                botname = "Failed Cheater";
+                document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
+                document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
+                cashimage();
+                playerturn();
+            } else {
+                botname = inputvalue;
+                document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
+                document.getElementById("output").innerHTML += "<br>You start with $" + p1cash + ".";
+                document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
+                cashimage();
+                playerturn();
+            }
+        } else {
+            botname = inputvalue;
+            document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
+            document.getElementById("output").innerHTML += "<br>You start with $1500."
+            document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
+            cashimage();
+            playerturn();
+        }
     } else if (turnq == 0) {
         playerturn2 ();
     } else if (getprop == "" && inputvalue == "y" || inputvalue == "n") {
@@ -520,11 +539,11 @@ function executeCommand () {
             }
         }
         rent[uppropi2] = rent[uppropi2] * 3;
-        p1cash = p1cash - 150;
+        p1cash = p1cash - upgradepropcost;
         document.getElementById("output").innerHTML += "<br>You curretnly have $" + p1cash + ".";
         document.getElementById("output").innerHTML += "<br>Current rent of " + places[uppropi2] + " is now $" + rent[uppropi2] + ".";
         getpropmusic();
-        upgradepropcost += 10;
+        upgradepropcost += 5;
         upques = 0;
         playerturn();
     }      
@@ -542,7 +561,7 @@ function updatestats () {
     }
 }
 //Start of Program
-document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure V2.1!";
+document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure V2.2!";
 document.getElementById("output").innerHTML += "Please enter the name of your opponent.";
 setInterval(updatestats, 5000);
 //updatestats();

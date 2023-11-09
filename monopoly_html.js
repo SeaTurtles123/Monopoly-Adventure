@@ -37,11 +37,11 @@ function placestogo() {
             space = 10;
             checkjail = 1;
         } else if (prices[space] == "income") {
-            document.getElementById("output").innerHTML += "<br>You payed $200 for income tax.";
+            document.getElementById("output").innerHTML += "<br>You paid $200 for income tax.";
             p1cash = p1cash - 200;
         } else if (prices[space] == "lux") {
             p1cash = p1cash - 75;
-            document.getElementById("output").innerHTML += "<br>You payed $75 for Luxury Tax and have $" + p1cash + " left.";
+            document.getElementById("output").innerHTML += "<br>You paid $75 for Luxury Tax and have $" + p1cash + " left.";
         } else if (prices[space] == "bought") {
             document.getElementById("output").innerHTML += "<br>" + places[space] + " is already bought.";
             owner = checkowner(space);
@@ -351,7 +351,7 @@ function botturn2 () {
         setTimeout(botplacestogo, 1000);
     } else {
         if (botcash > 200) {
-            document.getElementById("output").innerHTML += "<br>" + botname + " payed to get out of jail.";
+            document.getElementById("output").innerHTML += "<br>" + botname + " paid to get out of jail.";
             botcash = botcash - 50;
             botcheckjail = 0;
             document.getElementById("output").innerHTML += "<br>Your turn!";
@@ -398,17 +398,17 @@ function botplacestogo() {
             botspace = 10;
             botcheckjail = 1;
         } else if (prices[botspace] == "income") {
-            document.getElementById("output").innerHTML += "<br>" + botname + " payed $200 for income tax.";
+            document.getElementById("output").innerHTML += "<br>" + botname + " paid $200 for income tax.";
             botcash = botcash - 200;
         } else if (prices[botspace] == "lux") {
             botcash = botcash - 75;
-            document.getElementById("output").innerHTML += "<br>" + botname + " payed $75 for Luxury Tax.";
+            document.getElementById("output").innerHTML += "<br>" + botname + " paid $75 for Luxury Tax.";
         } else if (prices[botspace] == "bought") {
             owner = checkowner(botspace);
             if (owner == "p1") {
                 botcash = botcash - rent[botspace];
                 p1cash = p1cash + rent[botspace];
-                document.getElementById("output").innerHTML += "<br>" + botname + " payed you a rent of $" + rent[botspace];
+                document.getElementById("output").innerHTML += "<br>" + botname + " paid you a rent of $" + rent[botspace];
                 cashimage();
                 document.getElementById("output").innerHTML += "<br>You now have $" + p1cash;
             }
@@ -509,12 +509,12 @@ function executeCommand () {
         }
     } else if (turnq == 0) {
         playerturn2 ();
-    } else if (getprop == "" && inputvalue == "y" || inputvalue == "n") {
+    } else if (getprop == "" && (inputvalue == "y" || inputvalue == "n")) {
         getprop = inputvalue;
         if (inputvalue == "y") {
             buyprop();
         } else {
-            document.getElementById("output").innerHTML += "<br>___________________"
+            document.getElementById("output").innerHTML += "<br>___________________";
             botturn();
         }
     } else if (jailq == "") {
@@ -522,8 +522,8 @@ function executeCommand () {
         if (jailq == "y") {
             checkjail = 0;
             p1cash = p1cash - 50;
-            document.getElementById("output").innerHTML += "<br>You payed out of Jail and have $" + p1cash + " left!";
-        } else {
+            document.getElementById("output").innerHTML += "<br>You paid out of Jail and have $" + p1cash + " left!";
+        } else if (jailq == "n") {
             jail1 = getRandomNumberroll();
             jail2 = getRandomNumberroll();
             document.getElementById("output").innerHTML += "<br>You rolled a " + jail1 + " and a " + jail2;
@@ -533,6 +533,10 @@ function executeCommand () {
             } else {
                 document.getElementById("output").innerHTML += "<br>Better luck next time!";
             }
+        } else {
+            document.getElementById("output").innerHTML += "<br>Try again";
+            jailq = "";
+            return;
         }
         document.getElementById("output").innerHTML += "<br>_______________________";
         botturn();
@@ -561,9 +565,9 @@ function getpropmusic () {
 }
 function updatestats () {
     document.getElementById("stats").innerHTML = "Your stats:<br>Current cash: " + p1cash + "<br>Current Location: " + places[space];
-    document.getElementById("stats").innerHTML += "<br>Your properties are: "
+    document.getElementById("stats").innerHTML += "<br>Your properties are: ";
     for (var i = 0; i < p1prop.length; i++) {
-        document.getElementById("stats").innerHTML += "<br>" + i + ":" + p1prop[i];
+        document.getElementById("stats").innerHTML += "<br>" + i + ": " + p1prop[i];
     }
 }
 //Start of Program

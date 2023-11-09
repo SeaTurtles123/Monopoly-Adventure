@@ -317,6 +317,11 @@ function botturn () {
     setTimeout(botturn2, 1000);
 }
 function botturn2 () {
+    if (botcheatgo == 1) {
+        if (botnum(1, 200) == 100) {
+            botcheat();
+        }
+    }
     if (botnum(1, 3) == 1 && botprop.length >= 5) {
         if (botcash >= 250) {
             document.getElementById("output").innerHTML += "<br>" + botname + " is deciding which proerty to upgrade.";
@@ -463,6 +468,7 @@ var botdec = 0;
 var upgradepropcost = 150;
 var botupgradecost = 150;
 var inputvalue = "";
+var botcheatgo = 0;
 var botname = "";
 var upques = 0;
 function clearimages () {
@@ -486,12 +492,21 @@ function executeCommand () {
             if (isNaN(p1cash)) {
                 document.getElementById("output").innerHTML += "<br>You didn't enter a number!  Now you get $1000.  Good Luck!";
                 p1cash = 1000;
-                botname = "Failed Cheater";
+                botname = "Failed Cheater's Rival";
+                document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
+                document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
+                cashimage();
+                playerturn();
+            } else if (p1cash == null) {
+                document.getElementById("output").innerHTML += "<br>You didn't enter a number!  Now you get $1000.  Good Luck!";
+                p1cash = 1000;
+                botname = "Failed Cheater's Rival";
                 document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
                 document.getElementById("output").innerHTML += "<br><br><br>Turn " + turncount + " ____________________";
                 cashimage();
                 playerturn();
             } else {
+                botcheatgo = 1;
                 botname = "Cheaters Rival";
                 document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
                 document.getElementById("output").innerHTML += "<br>You start with $" + p1cash + ".";
@@ -499,6 +514,22 @@ function executeCommand () {
                 cashimage();
                 playerturn();
             }
+        } else if (inputvalue == "hardmode") {
+            document.getElementById("output").innerHTML += "<br>Welcome to Hard mode!";
+            document.getElementById("output").innerHTML += "<br>This mode is extra challenging, so if you want a casual game, reload the page.";
+            document.getElementById("output").innerHTML += "<br>Still here?";
+            document.getElementById("output").innerHTML += "<br>You are going to start with $600 and your opponent will have $1500.";
+            document.getElementById("output").innerHTML += "<br>Other aspects will be changed, but you will have to figure out what.";
+            document.getElementById("output").innerHTML += "<br>Good Luck!";
+            botname = "Very good bot";
+            p1cash = 600;
+            botcheatgo = 1;
+            prices = ["go", 70, "chest", 70, "income", 220, 120, "chance", 120, 170, "vistingjail", 180, 200, 200, 210, 300, 220, "chest", 240, 240, "parking", 260, "chance", 280, 300, 400, 350, 350, 350, 350, "jail", 370, 370, "chest", 400, 500, "chance", 450, "lux", 550];
+            chance = ["Boardwalk", "Jail/Just Visting", -50, "GO", "Back Three", -15, -150, "Illinois Avenue", "Reading Railroad", "St. Charles Place", -50, "New York Avenue", 200, -150];
+            rent = ["", 50, "", 8, "", 50, 12, "", 12, 16, "", 20, 10, 20, 24, 50, 28, "", 28, 32, "", 36, "", 36, 40, 50, 44, 44, 20, 48, "", 52, 52, "", 54, 50, "", 70, "", 100];
+            upgradepropcost = 185;
+            cashimage();
+            playerturn();
         } else {
             botname = inputvalue;
             document.getElementById("output").innerHTML += "<br>Your opponent's name is now " + botname + ".";
@@ -558,6 +589,10 @@ function executeCommand () {
         playerturn();
     }      
 }
+function botcheat () {
+    document.getElementById("output").innerHTML += "<br>" + botname + " decided to cheat because why not.  " + botname + " gained $200";
+    botcash += 200;
+}
 function getpropmusic () {
     document.getElementById("images").innerHTML = '<img src="buyproppic.jpg" alt="pic-of-house">';
     document.getElementById("images").innerHTML += '<embed src="getstuff.mp3" loop="false" autostart="true" width="2" height="0">';
@@ -571,7 +606,7 @@ function updatestats () {
     }
 }
 //Start of Program
-document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure V2.2!";
+document.getElementById("title").innerHTML = "Welcome to Monopoly Adventure V2.3!";
 document.getElementById("output").innerHTML += "Please enter the name of your opponent.";
 setInterval(updatestats, 5000);
 //updatestats();

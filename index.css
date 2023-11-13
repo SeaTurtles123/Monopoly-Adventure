@@ -2,9 +2,18 @@ p {
     color:rgb(0, 0, 0);
     font-size: large;
 }
+#github {
+    color:rgb(0, 0, 0);
+    font-size: large;
+}
 #title {
     font-family: 'Times New Roman', Times, serif;
     text-align: center;
+}
+#title1 {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: xx-large;
 }
 body {
     background-color: antiquewhite;

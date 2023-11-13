@@ -1,5 +1,6 @@
 p {
-    color:aqua;
+    color:rgb(0, 0, 0);
+    font-size: large;
 }
 #title {
     font-family: 'Times New Roman', Times, serif;
@@ -42,4 +43,9 @@ body {
     font-size: 25px;
     overflow: auto;
     height: 200px;
+}
+#playimage {
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
 }

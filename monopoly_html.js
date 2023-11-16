@@ -69,13 +69,6 @@ function checkowner (prop) {
         }
     }
 }
-//function sleep(milliseconds) {
-   // const date = Date.now();
-   // let currentDate = null;
-   // do {
-   //   currentDate = Date.now();
-   // } while (currentDate - date < milliseconds);
-//}
 function getchestcard() {
     chestnum = getRandomNumbercard();
     chestspace = cchest[chestnum];
@@ -256,9 +249,6 @@ function playerturn2 () {
     }
     if (turnq == 4 && p1prop.length >= 5) {
         upgradeprop();
-        return;
-    }
-    if (turnq == 6) {
         return;
     }
     if (turnq == 2) {
@@ -539,14 +529,21 @@ function executeCommand () {
             playerturn();
         }
     } else if (turnq == 0) {
+        if (isNaN(inputvalue)) {
+            document.getElementById("output").innerHTML += "<br>You didn't enter a number.  Try again.";
+            return;
+        }
         playerturn2 ();
     } else if (getprop == "" && (inputvalue == "y" || inputvalue == "n")) {
         getprop = inputvalue;
         if (inputvalue == "y") {
             buyprop();
-        } else {
+        } else if (inputvalue == "n") {
             document.getElementById("output").innerHTML += "<br>___________________";
             botturn();
+        } else {
+            document.getElementById("output").innerHTML += "<br>Sorry, your request was read incorrectly.  Please try again.";
+            return;
         }
     } else if (jailq == "") {
         jailq = inputvalue;
@@ -572,6 +569,10 @@ function executeCommand () {
         document.getElementById("output").innerHTML += "<br>_______________________";
         botturn();
     } else if (upq == "" && upques == 1) {
+        if (isNaN(inputvalue)) {
+            document.getElementById("output").innerHTML += "<br>You didn't enter a number.  Try again.";
+            return;
+        }
         upq = inputvalue;
         document.getElementById("output").innerHTML += "<br>You selected " + p1prop[upq] + ".";
         for (var i = 0; i < places.length; i++) {

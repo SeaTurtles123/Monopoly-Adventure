@@ -314,7 +314,7 @@ function botturn2 () {
     }
     if (botnum(1, 3) == 1 && botprop.length >= 5) {
         if (botcash >= 250) {
-            document.getElementById("output").innerHTML += "<br>" + botname + " is deciding which proerty to upgrade.";
+            document.getElementById("output").innerHTML += "<br>" + botname + " is deciding which property to upgrade.";
             botup1 = botnum(0, botprop.length);
             for (var i = 0; i < places.length; i++) {
                 if (places[i] == botprop[botup1]) {
@@ -331,7 +331,6 @@ function botturn2 () {
     } 
     if (botcheckjail == 0) {
         document.getElementById("output").innerHTML += "<br>" + botname + " is rolling.";
-        //sleep(1000);
         botroll = getRandomNumberroll() + getRandomNumberroll();
         botspace = botspace + botroll;
         if (botspace >= 40) {

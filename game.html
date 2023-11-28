@@ -5,6 +5,12 @@
     </head>
     <body>
         <h1 id="title"></h1>
+        <div id="audioimages">
+            <img class="audioimage" src="audiomuted.png" alt="muted audio">
+            <script>
+                var imagetype = "muted";
+            </script>
+        </div>
         <div id = "images"></div>
         <div id = container>
             <div id="output">
@@ -18,10 +24,25 @@
         <div id = "stats">
             
         </div>
-        <audio autoplay loop muted>
-            <source src="sample.mp3" type="audio/mpeg">
-            Your bowser does not support the audio element.
-        </audio>
+        <div id="audiosound">
+            <audio id="audioback" loop>
+                <source src="backgroundmusic.wav" type="audio/wav">
+            </audio>
+        </div>
+        <script>
+            const element = document.getElementById("audioimages");
+            element.addEventListener("click", function() {
+                if (imagetype == "muted") {
+                    document.getElementById("audioback").play();
+                    document.getElementById("audioimages").innerHTML = '<img class="audioimage" src="audioplaying.png" alt="playing audio">';
+                    imagetype = "playing";
+                } else if (imagetype == "playing") {
+                    document.getElementById("audioback").pause();
+                    document.getElementById("audioimages").innerHTML = '<img class="audioimage" src="audiomuted.png" alt="muted audio" width="563px">';
+                    imagetype = "muted";
+                }
+            });
+        </script>
         <script src="monopoly_html.js"></script>
         
     </body>

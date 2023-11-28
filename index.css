@@ -58,3 +58,7 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+.audioimage {
+    width: 25px;
+    float: right;
+}

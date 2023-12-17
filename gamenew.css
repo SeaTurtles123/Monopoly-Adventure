@@ -1,0 +1,97 @@
+p {
+    color:black;
+    font-size: large;
+}
+#title {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+}
+#linktitle {
+    color: black;
+    
+}
+#title1 {
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    font-size: xx-large;
+}
+body {
+    background-color: antiquewhite;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+table {
+    width: 68%;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+tr {
+    height: 83px;
+}
+#middle {
+    background-color: white;
+    vertical-align: middle;
+}
+#middletext {
+    text-align: center;
+    transform: rotate(-45deg);
+    color: rgb(173, 0, 0);
+    font-size: 75px;
+}
+#_1, #_3 {
+    background-color: darkviolet;
+    font-size: 15px;
+}
+#_6, #_8, #_9 {
+    background-color: lightskyblue;
+}
+#_11, #_13, #_14 {
+    background-color: rgb(197, 0, 177);
+}
+#_16, #_18, #_19 {
+    background-color: orange;
+}
+#_21, #_23, #_24 {
+    background-color: red;
+}
+#_26, #_27, #_29 {
+    background-color: yellow;
+}
+#_31, #_32, #_34 {
+    background-color: rgb(1, 131, 1);
+}
+#_37, #_39 {
+    background-color: blue;
+}
+#container {
+    height: 550px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+.input-container {
+    display: flex;
+    padding: 10px;
+}
+.input-container input {
+    flex: 1;
+    padding: 5px;
+}
+.input-container button {
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+#_0, #_2, #_4, #_5, #_7, #_10, #_38, #_36, #_15, #_35, #_17, #_33, #_20, #_22, #_25, #_28, #_30,#_12 {
+    background-color: white;
+}
+td {
+    text-align: center;
+    vertical-align: top;
+    font-weight: bold;
+}
+img {
+    float: none;
+}

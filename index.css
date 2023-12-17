@@ -62,3 +62,13 @@ body {
     width: 25px;
     float: right;
 }
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+#_1, #_3 {
+    background-color: darkviolet;
+}
+#_6, #_8, #_9 {
+    background-color: lightskyblue;
+}

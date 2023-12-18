@@ -72,3 +72,9 @@ table, th, td {
 #_6, #_8, #_9 {
     background-color: lightskyblue;
 }
+#choosetb {
+    text-align: center;
+}
+td {
+    font-size: xx-large;
+}

@@ -7,12 +7,18 @@ function getRandomNumbercard() {
 function botnum(min, max) {
     return Math.floor(Math.random() * max) + min;
 }
+function addText (id, text) {
+    document.getElementById(id).innerHTML += text;
+}
+function setText (id, text) {
+    document.getElementById(id).innerHTML = text;
+}
 function buyprop () {
     p1prop.push(places[space]);
     p1cash = p1cash - prices[space];
-    document.getElementById("output").innerHTML += "<br>You now have $" + p1cash;
+    addText("output", "<br>You now have $" + p1cash);
     prices[space] = "bought";
-    document.getElementById("output").innerHTML += "<br>________________________________";
+    addText("output", "<br>________________________________");
     document.getElementById("_" + space).innerHTML += "<br>You own this space";
     document.getElementById("output").innerHTML += "<br>" + botname + "'s turn:";
     //sleep(500);
@@ -22,7 +28,8 @@ function placestogo() {
     if (typeof prices[space] != "string") {
         document.getElementById("output").innerHTML += "<br>You currently have $" + p1cash;
         getprop = "";
-        document.getElementById("output").innerHTML += "<br>Would you like to buy " + places[space] + " for $" + prices[space] + "? (y/n)";
+        document.getElementById("output").innerHTML += "<br>Would you like to buy " + places[space] + " for $" + prices[space] + "?";
+        addText("output", "<br>If yes, click the property.  If no, type 'n' in the console.");
     } else {
         if (prices[space] == "chance") {
             getchancecard();
@@ -30,11 +37,11 @@ function placestogo() {
             getchestcard();
         } else if (prices[space] == "parking") {
             p1cash = p1cash + 500;
-            //cashimage();
             document.getElementById("output").innerHTML += "<br>You landed on Free Parking and earned $500!";
         } else if (prices[space] == "jail") {
             document.getElementById("output").innerHTML += "<br>You got sent to jail.";
             space = 10;
+            setSpace(1, 10, 30);
             checkjail = 1;
         } else if (prices[space] == "income") {
             document.getElementById("output").innerHTML += "<br>You paid $200 for income tax.";
@@ -71,6 +78,7 @@ function checkowner (prop) {
 }
 function getchestcard() {
     chestnum = getRandomNumbercard();
+    pspacep = space;
     chestspace = cchest[chestnum];
     if (typeof chestspace == "string") {
         for (var i = 0; i < places.length; i++) {
@@ -81,9 +89,11 @@ function getchestcard() {
         space = chesti;
         if (chestspace == "Jail/Just Visting") {
             document.getElementById("output").innerHTML += "<br>You got sent to jail!";
+            setSpace(1, 10, pspacep);
             checkjail = 1;
         } else {
             document.getElementById("output").innerHTML += "<br>You are now on " + places[space];
+            setSpace(1, space, pspacep);
             placestogo();
         }
     } else {
@@ -100,6 +110,7 @@ function getchestcard() {
 function botgetchestcard() {
     chestnum = getRandomNumbercard();
     chestspace = cchest[chestnum];
+    pspacep = botspace;
     if (typeof chestspace == "string") {
         for (var i = 0; i < places.length; i++) {
             if (places[i] == chestspace) {
@@ -109,9 +120,11 @@ function botgetchestcard() {
         botspace = chesti;
         if (chestspace == "Jail/Just Visting") {
             document.getElementById("output").innerHTML += "<br>" + botname + " got sent to jail!";
+            setSpace(2, 10, pspacep);
             botcheckjail = 1;
         } else {
             document.getElementById("output").innerHTML += "<br>" + botname + " is now on " + places[space];
+            setSpace(2, botspace, pspacep);
             botplacestogo();
         }
     } else {
@@ -132,6 +145,7 @@ function getchancecard() {
             space = space - 3;
             document.getElementById("output").innerHTML += "<br>You moved back three spaces.";
             document.getElementById("output").innerHTML += "<br>You are now on " + places[space];
+            setSpace(1, space, space + 3);
             placestogo();
         } else {
             for (var i = 0; i < places.length; i++) {
@@ -141,15 +155,17 @@ function getchancecard() {
             }
             if (space > chancei) {
                 p1cash = p1cash + 200;
-                //cashimage();
                 document.getElementById("output").innerHTML += "<br>You passed Go and Collected $200!";
             }
+            pspacep = space;
             space = chancei;
             if (chancespace == "Jail/Just Visting") {
                 document.getElementById("output").innerHTML += "<br>You got sent to jail!";
+                setSpace(1, 10, pspacep);
                 checkjail = 1;
             } else {
                 document.getElementById("output").innerHTML += "<br>You are now on " + places[space];
+                setSpace(1, space, pspacep);
                 placestogo();
             }
         }
@@ -171,6 +187,7 @@ function botgetchancecard() {
         if (chancespace == "Back Three") {
             botspace = botspace - 3;
             document.getElementById("output").innerHTML += "<br>" + botname + " moved back three spaces.";
+            setSpace(2, botspace, botspace + 3);
         } else {
             for (var i = 0; i < places.length; i++) {
                 if (places[i] == chancespace) {
@@ -181,12 +198,15 @@ function botgetchancecard() {
                 botcash = botcash + 200;
                 document.getElementById("output").innerHTML += "<br>" + botname + " passed Go and Collected $200.";
             }
+            pspacep = botspace;
             botspace = chancei;
             if (chancespace == "Jail/Just Visting") {
                 document.getElementById("output").innerHTML += "<br>" + botname + " got sent to jail!";
+                setSpace(2, 10, pspacep);
                 botcheckjail = 1;
             } else {
                 document.getElementById("output").innerHTML += "<br>" + botname + " is now on " + places[botspace];
+                setSpace(2, botspace, pspacep);
                 botplacestogo();
             }
         }
@@ -230,17 +250,7 @@ function roll() {
             p1cash = p1cash + 200;
         }
         document.getElementById("output").innerHTML += "<br>You rolled a " + p1_roll + " and landed on " + places[space];
-        pspacep = space - p1_roll;
-        if (pspacep < 0) {
-            pspacep = pspacep + 40;
-        }
-        document.getElementById("_" + pspacep).innerHTML = places[pspacep];
-        if (botprop.indexOf(places[pspacep]) != -1) {
-            document.getElementById("_" + pspacep).innerHTML += "<br>" + botname + " owns this space.";
-        } else if (p1prop.indexOf(places[pspacep]) != -1) {
-            document.getElementById("_" + pspacep).innerHTML += "<br>You own this space.";
-        }
-        document.getElementById("_" + space).innerHTML += '<img src="p1_piece.png" alt="player piece" width="40px">'
+        setSpace(1, space, space - p1_roll);
         placestogo();
     } else {
         document.getElementById("output").innerHTML += "<br>You have $" + p1cash;
@@ -351,17 +361,7 @@ function botturn2 () {
             botcash = botcash + 686;
         }
         document.getElementById("output").innerHTML += "<br>" + botname + " rolled a " + botroll + " and landed on " + places[botspace];
-        pspacep = botspace - botroll;
-        if (pspacep < 0) {
-            pspacep = pspacep + 40;
-        }
-        document.getElementById("_" + pspacep).innerHTML = places[pspacep];
-        if (botprop.indexOf(places[pspacep]) != -1) {
-            document.getElementById("_" + pspacep).innerHTML += "<br>" + botname + " owns this space.";
-        } else if (p1prop.indexOf(places[pspacep]) != -1) {
-            document.getElementById("_" + pspacep).innerHTML += "<br>You own this space.";
-        }
-        document.getElementById("_" + botspace).innerHTML += '<img src="botpiece.png" alt="bot piece" width="40px">';
+        setSpace(2, botspace, botspace - botroll);
         setTimeout(botplacestogo, 1000);
     } else {
         if (botcash > 200) {
@@ -411,6 +411,7 @@ function botplacestogo() {
         } else if (prices[botspace] == "jail") {
             document.getElementById("output").innerHTML += "<br>" + botname + " got sent to jail.";
             botspace = 10;
+            setSpace(2, 10, 30);
             botcheckjail = 1;
         } else if (prices[botspace] == "income") {
             document.getElementById("output").innerHTML += "<br>" + botname + " paid $200 for income tax.";
@@ -429,6 +430,37 @@ function botplacestogo() {
             }
         }
     }    
+}
+function setSpace (player, currentspace, pspace) {
+    if (player == 1) {
+        if (pspace < 0) {
+            pspace = pspace + 40;
+        }
+        document.getElementById("_" + pspace).innerHTML = places[pspace];
+        if (botprop.indexOf(places[pspace]) != -1) {
+            document.getElementById("_" + pspace).innerHTML += "<br>" + botname + " owns this space.";
+        } else if (p1prop.indexOf(places[pspace]) != -1) {
+            document.getElementById("_" + pspace).innerHTML += "<br>You own this space.";
+        }
+        if (pspace == botspace) {
+            addText("_" + pspace, '<img src="botpiece.png" alt="bot piece" width="40px"></img>');
+        }
+        document.getElementById("_" + currentspace).innerHTML += '<img src="p1_piece.png" alt="player piece" width="40px">'
+    } else if (player == 2) {
+        if (pspace < 0) {
+            pspace = pspace + 40;
+        }
+        document.getElementById("_" + pspace).innerHTML = places[pspace];
+        if (botprop.indexOf(places[pspace]) != -1) {
+            document.getElementById("_" + pspace).innerHTML += "<br>" + botname + " owns this space.";
+        } else if (p1prop.indexOf(places[pspace]) != -1) {
+            document.getElementById("_" + pspace).innerHTML += "<br>You own this space.";
+        }
+        if (pspace == space) {
+            addText("_" + pspace, '<img src="p1_piece.png" alt="player piece" width="40px"></img>');
+        }
+        document.getElementById("_" + currentspace).innerHTML += '<img src="botpiece.png" alt="bot piece" width="40px">';
+    }
 }
 //Variables
 var prices = ["go", 60, "chest", 60, "income", 200, 100, "chance", 100, 120, "vistingjail", 140, 150, 140, 160, 200, 180, "chest", 180, 200, "parking", 220, "chance", 220, 240, 200, 260, 260, 150, 280, "jail", 300, 300, "chest", 320, 200, "chance", 350, "lux", 400];
@@ -544,11 +576,9 @@ function executeCommand () {
             return;
         }
         playerturn2 ();
-    } else if (getprop == "" && (inputvalue == "y" || inputvalue == "n")) {
+    } else if (getprop == "" && inputvalue == "n") {
         getprop = inputvalue;
-        if (inputvalue == "y") {
-            buyprop();
-        } else if (inputvalue == "n") {
+        if (inputvalue == "n") {
             document.getElementById("output").innerHTML += "<br>___________________";
             botturn();
         } else {
@@ -601,21 +631,18 @@ function executeCommand () {
     }      
 }
 function botcheat () {
-    document.getElementById("output").innerHTML += "<br>" + botname + " decided to cheat because why not.  " + botname + " gained $200";
+    document.getElementById("output").innerHTML += "<br>" + botname + " decided to cheat because why not.  " + botname + " gained $200!";
     botcash += 200;
 }
-function getpropmusic () {
-    document.getElementById("images").innerHTML = '<img src="buyproppic.jpg" alt="pic-of-house">';
-    document.getElementById("images").innerHTML += '<embed src="getstuff.mp3" loop="false" autostart="true" width="2" height="0">';
-    setTimeout(clearimages, 2500);
-}
-function updatestats () {
-    document.getElementById("stats").innerHTML = "Your stats:<br>Current cash: " + p1cash + "<br>Current Location: " + places[space];
-    document.getElementById("stats").innerHTML += "<br>Your properties are: ";
-    for (var i = 0; i < p1prop.length; i++) {
-        document.getElementById("stats").innerHTML += "<br>" + i + ": " + p1prop[i];
+function checkforbuy (propert) {
+    if (getprop == "") {
+        if (propert == space) {
+            buyprop();
+        } else {
+            addText("output", "<br>Stop trying to cheat!  Click on the right one or type 'n' in the console.");
+        }
     }
 }
 //Start of Program
-document.getElementById("title").innerHTML = '<a id="linktitle" href="index.html">Monopoly Adventure V2.5</a>';
-document.getElementById("output").innerHTML += "Please enter the name of your opponent.";
+setText("title", '<a id="linktitle" href="index.html">Monopoly Adventure V2.5.1</a>');
+addText("output", "Please enter the name of your opponent.");

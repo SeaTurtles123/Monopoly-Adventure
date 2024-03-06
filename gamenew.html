@@ -5,7 +5,7 @@
     </head>
     <body>
         <h1 id="title"></h1>
-        <table>
+        <table id="board">
             <tr>
                 <td id="_20">Free Parking</td>
                 <td onclick="checkforbuy(21);" id="_21">Kentucky Ave</td>
@@ -70,6 +70,16 @@
                 <td id="_0">GO!</td>
             </tr>
         </table>
+        <br>
+        <table id="roll"  width="20%">
+            <tr id="roll2">
+                <td id="dice"><img src="dice1.png" alt="dice1" width="70px"><img src="dice1.png" alt="dice2" width="70px"></td>
+            </tr>
+            <tr id="button">
+                <td id="rollbutton" onclick="checkforroll();">Roll Dice</td>
+            </tr>
+        </table>
+        <br>
         <div id = container>
             <div id="output">
                 <!-- Output goes here -->

@@ -606,7 +606,7 @@ function updatestats () {
     }
 }
 //Start of Program
-document.getElementById("title").innerHTML = '<a id="linktitle" href="index.html">Monopoly Adventure V2.5.1</a>';
+document.getElementById("title").innerHTML = '<a id="linktitle" href="index.html">Monopoly Adventure V6</a>';
 document.getElementById("output").innerHTML += "Please enter the name of your opponent.";
 setInterval(updatestats, 5000);
 //updatestats();

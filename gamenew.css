@@ -22,10 +22,12 @@ table, th, td {
     border: 1px solid black;
     border-collapse: collapse;
 }
-table {
+#board {
     width: 68%;
     table-layout: fixed;
     float: left;
+    flex: 50%;
+    padding: 5px;
 }
 tr {
     height: 83px;
@@ -39,6 +41,7 @@ tr {
     transform: rotate(-45deg);
     color: rgb(173, 0, 0);
     font-size: 75px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 #_1, #_3 {
     background-color: darkviolet;
@@ -66,23 +69,34 @@ tr {
     background-color: blue;
 }
 #container {
-    height: 550px;
+    height: 400px;
     overflow: auto;
     display: flex;
     flex-direction: column-reverse;
     padding-left: 10px;
-  }
+    clear: right;
+    float: right;
+    padding-top: 10px;
+    position: absolute;
+    position: absolute;
+    top: 400px;
+    right: 10px;
+    left: 1300px;
+}
 .input-container {
     display: flex;
     padding: 10px;
+    float: left;
 }
 .input-container input {
     flex: 1;
     padding: 5px;
+    float: left;
 }
 .input-container button {
     padding: 5px 10px;
     margin-left: 10px;
+    float: left;
 }
 #_0, #_2, #_4, #_5, #_7, #_10, #_38, #_36, #_15, #_35, #_17, #_33, #_20, #_22, #_25, #_28, #_30,#_12 {
     background-color: white;
@@ -94,4 +108,22 @@ td {
 }
 img {
     float: none;
+    padding: 5px;
+}
+#roll {
+    margin-top: 10px;
+    margin-left: 10px;
+    float: left;
+    flex: 50%;
+    padding: 5px;
+}
+#dice {
+    vertical-align: middle;
+}
+#rollbutton {
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: x-large;
+    background-color: dimgrey;
 }

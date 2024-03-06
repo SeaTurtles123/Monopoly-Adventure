@@ -14,6 +14,7 @@ function setText (id, text) {
     document.getElementById(id).innerHTML = text;
 }
 function buyprop () {
+    getprop = "b";
     p1prop.push(places[space]);
     p1cash = p1cash - prices[space];
     addText("output", "<br>You now have $" + p1cash);
@@ -62,6 +63,10 @@ function placestogo() {
                 document.getElementById("output").innerHTML += "<br>You now have $" + p1cash;
             }
         }
+        document.getElementById("output").innerHTML += "<br>________________________________";
+        document.getElementById("output").innerHTML += "<br>" + botname + "'s turn:";
+        //sleep(500);
+        botturn();
     }    
 }
 function checkowner (prop) {
@@ -238,33 +243,50 @@ function upgradeprop() {
 }
 function roll() {
     if (checkjail == 0) {
-        p1_roll =  getRandomNumberroll() + getRandomNumberroll();
-        if (p1_roll == 2) {
-            p1cash = p1cash + 686;
-            document.getElementById("output").innerHTML += "<br>You rolled Snake Eyes and got $686!";
-        }
-        space = space + p1_roll;
-        if (space >= 40) {
-            space = space - 40;
-            document.getElementById("output").innerHTML += "<br>You passed GO and colleted $200!";
-            p1cash = p1cash + 200;
-        }
-        document.getElementById("output").innerHTML += "<br>You rolled a " + p1_roll + " and landed on " + places[space];
-        setSpace(1, space, space - p1_roll);
-        placestogo();
+        p1_roll = 0;
     } else {
         document.getElementById("output").innerHTML += "<br>You have $" + p1cash;
         jailq = "";
         document.getElementById("output").innerHTML += "<br>Would you like to pay to get out of jail? (y/n)";
     }
 }
+function rolldice (num1, num2) {
+    if (p1_roll == 0) {
+        p1_roll = num1 + num2;
+        roll1 = num1;
+        roll2 = num2;
+    }
+    if (countdice != 100) {
+        countdice++;
+        setTimeout(replacediceimage, 20);
+    } else if (countdice == 100) {
+        countdice = 0;
+        setText("dice", '<img src="dice' + roll1 + '.png" alt="dice1" width="70px"><img src="dice' + roll2 + '.png" alt="dice2" width="70px">');
+        if (p1_roll == roll1 + roll2) {
+            if (p1_roll == 2) {
+                p1cash = p1cash + 686;
+                document.getElementById("output").innerHTML += "<br>You rolled Snake Eyes and got $686!";
+            }
+            space = space + p1_roll;
+            if (space >= 40) {
+                space = space - 40;
+                document.getElementById("output").innerHTML += "<br>You passed GO and colleted $200!";
+                p1cash = p1cash + 200;
+            }
+            document.getElementById("output").innerHTML += "<br>You rolled a " + p1_roll + " and landed on " + places[space];
+            setSpace(1, space, space - p1_roll);
+            placestogo();
+        }
+    } 
+}
+function replacediceimage () {
+    setText("dice", '<img src="dice' + getRandomNumberroll() + '.png" alt="dice1" width="70px"><img src="dice' + getRandomNumberroll() + '.png" alt="dice2" width="70px">');
+    rolldice();
+}
 function playerturn2 () {
     turnq = inputvalue;
-    if (turnq == 1) {
-        roll();
-        if (jailq == "" || getprop == "") {
-            return;
-        }
+    if (turnq == 0) {
+        turnq = 1;
     }
     if (turnq == 4 && p1prop.length >= 5) {
         upgradeprop();
@@ -314,7 +336,8 @@ function playerturn () {
         return;
     }
     turnq = 0;
-    document.getElementById("output").innerHTML += "<br>Would you like to, 1. Roll the dice, 2. View Stats, 3. View " + botname + "'s stats" + up + " (Enter Number)";
+    document.getElementById("output").innerHTML += "<br>Would you like to, Roll the dice, 2. View Stats, 3. View " + botname + "'s stats" + up + " (Enter Number or Click Box)";
+    p1_roll = 0;
 }
 function botturn () {
     if (botcash < 0) {
@@ -443,7 +466,7 @@ function setSpace (player, currentspace, pspace) {
             document.getElementById("_" + pspace).innerHTML += "<br>You own this space.";
         }
         if (pspace == botspace) {
-            addText("_" + pspace, '<img src="botpiece.png" alt="bot piece" width="40px"></img>');
+            addText("_" + pspace, '<img src="botpiece.png" alt="bot piece" width="40px">');
         }
         document.getElementById("_" + currentspace).innerHTML += '<img src="p1_piece.png" alt="player piece" width="40px">'
     } else if (player == 2) {
@@ -457,7 +480,7 @@ function setSpace (player, currentspace, pspace) {
             document.getElementById("_" + pspace).innerHTML += "<br>You own this space.";
         }
         if (pspace == space) {
-            addText("_" + pspace, '<img src="p1_piece.png" alt="player piece" width="40px"></img>');
+            addText("_" + pspace, '<img src="p1_piece.png" alt="player piece" width="40px">');
         }
         document.getElementById("_" + currentspace).innerHTML += '<img src="botpiece.png" alt="bot piece" width="40px">';
     }
@@ -465,7 +488,7 @@ function setSpace (player, currentspace, pspace) {
 //Variables
 var prices = ["go", 60, "chest", 60, "income", 200, 100, "chance", 100, 120, "vistingjail", 140, 150, 140, 160, 200, 180, "chest", 180, 200, "parking", 220, "chance", 220, 240, 200, 260, 260, 150, 280, "jail", 300, 300, "chest", 320, 200, "chance", 350, "lux", 400];
 const places = ["GO", "Mediterranean Avenue", "Community Chest", "Baltic Avenue", "Income Tax", "Reading Railroad", "Oriental Avenue", "Chance", "Vermont Avenue", "Connecticut Avenue", "Jail/Just Visting", "St. Charles Place", "Electric Company", "States Avenue", "Virginia Avenue", "Pennsylvania Railroad", "St. James Place", "Community Chest", "Tennessee Avenue", "New York Avenue", "Free Parking", "Kentucky Avenue", "Chance", "Indiana Avenue", "Illinois Avenue", "B. & O. Railroad", "Atlantic Avenue", "Ventnor Avenue", "Water Works", "Marvin Gardens", "Go to Jail", "Pacific Avenue", "North Carolina Avenue", "Community Chest", "Pennsylvania Avenue", "Short Line", "Chance", "Park Place", "Luxury Tax", "Boardwalk"];
-var p1_roll = 0;
+var p1_roll = 12;
 var botcash = 1500;
 var rent = ["", 2, "", 4, "", 25, 6, "", 6, 8, "", 10, 5, 10, 12, 25, 14, "", 14, 16, "", 18, "", 18, 20, 25, 22, 22, 10, 24, "", 26, 26, "", 28, 25, "", 35, "", 50];
 var space = 0;
@@ -491,6 +514,7 @@ var owner = 0;
 var chesti = "";
 var turncount = 1;
 var chancenum = 0;
+var countdice = 0;
 var chancei = 0;
 var jailq = "y";
 var jail1 = 0;
@@ -500,6 +524,8 @@ var botup1 = 0;
 var botup2 = 0;
 var turnq1 = "";
 var turnq2 = "";
+var roll1 = 0;
+var roll2 = 0;
 var upqy = "";
 var up = "";
 var uppropi2 = 0;
@@ -574,6 +600,9 @@ function executeCommand () {
         if (isNaN(inputvalue)) {
             document.getElementById("output").innerHTML += "<br>You didn't enter a number.  Try again.";
             return;
+        } else if (inputvalue == 1) {
+            addText("output", "<br>Please click roll dice.");
+            return;
         }
         playerturn2 ();
     } else if (getprop == "" && inputvalue == "n") {
@@ -643,6 +672,13 @@ function checkforbuy (propert) {
         }
     }
 }
+function checkforroll () {
+    if (p1_roll == 0) {
+        rolldice(getRandomNumberroll(), getRandomNumberroll());
+    } else {
+        addText("output", "<br>Stop trying to cheat!");
+    }
+}
 //Start of Program
-setText("title", '<a id="linktitle" href="index.html">Monopoly Adventure V2.5.1</a>');
+setText("title", '<a id="linktitle" href="index.html">Monopoly Adventure V2.6</a>');
 addText("output", "Please enter the name of your opponent.");

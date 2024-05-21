@@ -1,6 +1,8 @@
 # Monopoly-Adventure
 A fun twist on Monopoly, that is all text-based.
 
+<strong>Version 2.6 is now out!</strong>
+
 Setup:
 
 So, this file is made from VS code using node js so you will either need to install node js from your computer or use an online version.

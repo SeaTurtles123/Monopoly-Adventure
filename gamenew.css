@@ -74,14 +74,10 @@ tr {
     display: flex;
     flex-direction: column-reverse;
     padding-left: 10px;
+    padding-right: 10px;
     clear: right;
     float: right;
     padding-top: 10px;
-    position: absolute;
-    position: absolute;
-    top: 400px;
-    right: 10px;
-    left: 1300px;
 }
 .input-container {
     display: flex;

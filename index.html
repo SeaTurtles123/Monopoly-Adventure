@@ -4,8 +4,13 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
+        <script>
+            fetch('./basic.json')
+                .then((response) => response.json())
+                .then((json) => console.log(json));
+        </script>
         <u><h1 id="title1">Welcome to Monopoly Adventure V2.6!</h1></u>
-        <strong><p>What is Monopoly Adventure?</p></strong>
+        <strong><p><a href="game2play.html">Click</a>What is Monopoly Adventure?</p></strong>
         <p>This is a game that is based on Monopoly but is all text and no board.  Some aspects of the game are the same however changed a bit to match the text only.</p>
         <strong><p>How do I play?</p></strong>
         <p>The game will have a text box in the middle of the screen and will tell you what is happening in the game.  You will use the text box at the bottom of the screen to answer the questions and progress through the game.
